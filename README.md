@@ -1,16 +1,15 @@
-# Hello Bank Backend
+# Ecospend Backend
 
-This repository contains the **backend service** for **HelloBank**, a fully digital online banking system.  
+This repository contains the **backend service** for **Ecospend**, a fully digital online banking system.  
 The backend provides REST APIs for user authentication, account management, transactions, card services, beneficiary handling, ticketing, and admin operations.
 
 ## Team Members
 
-Section 6B – Web Programming
+Section 8C – Web Programming
 
 Name Roll No
-Muhammad Umar 22L-6592
-Abdullah Yasir 22I-0803
-Abdur Rafey 22L-7844
+Hajrah Rehan 22L-6810        
+M Salman Amir 22L-6830
 
 ## Features
 
