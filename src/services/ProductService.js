@@ -12,4 +12,8 @@ module.exports = {
   FindOne: async (where) => {
     return ProductModel.findOne(where);
   },
+
+  Delete: async (where) => {
+    return ProductModel.deleteOne(where);
+  },
 };

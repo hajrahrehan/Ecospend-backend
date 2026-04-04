@@ -262,7 +262,7 @@ module.exports = {
         userId: null,
         name: "Admin",
         account_no: user.account_no,
-        bank: "HelloBank",
+        bank: "EcoSpend",
         amount: amt,
         type: "transfer",
       });
@@ -270,6 +270,69 @@ module.exports = {
       return res.json({
         status: Status.SUCCESS,
         message: "Balance updated.",
+        data: {},
+      });
+    } catch (e) {
+      ErrorManager.getError(res, "UNKNOWN_ERROR");
+      logger.error(e.message + "\n" + e.stack);
+      if (environment === "prod") throw e;
+    }
+  },
+
+  GetProducts: async (req, res) => {
+    try {
+      const data = await DBService.Product.Find({});
+      return res.json({
+        status: Status.SUCCESS,
+        message: "Products list.",
+        data,
+      });
+    } catch (e) {
+      ErrorManager.getError(res, "UNKNOWN_ERROR");
+      logger.error(e.message + "\n" + e.stack);
+      if (environment === "prod") throw e;
+    }
+  },
+
+  AddProduct: async (req, res) => {
+    const { name, description, price, image } = req.body;
+    if (!name || !description || price == null || isNaN(price)) {
+      return ErrorManager.getError(res, "INCOMPLETE_ARGS");
+    }
+
+    try {
+      await DBService.Product.Create({
+        name,
+        description,
+        price: Number(price),
+        image: image || "",
+        status: "active",
+      });
+
+      return res.json({
+        status: Status.SUCCESS,
+        message: "Product added.",
+        data: {},
+      });
+    } catch (e) {
+      ErrorManager.getError(res, "UNKNOWN_ERROR");
+      logger.error(e.message + "\n" + e.stack);
+      if (environment === "prod") throw e;
+    }
+  },
+
+  DeleteProduct: async (req, res) => {
+    const { id } = req.params;
+    if (!id) {
+      return ErrorManager.getError(res, "INCOMPLETE_ARGS");
+    }
+
+    try {
+      await DBService.Product.Delete({ _id: id });
+
+      return res.json({
+        status: Status.SUCCESS,
+        message: "Product deleted.",
         data: {},
       });
     } catch (e) {

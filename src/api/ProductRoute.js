@@ -5,6 +5,7 @@ const Middleware = require("../cors/Middleware");
 
 module.exports = () => {
   router.use(Middleware.NoAuthenticate);
+  router.get("/", ProductController.ListProducts);
   router.post("/buy", ProductController.BuyProduct);
 
   return router;

@@ -11,6 +11,21 @@ const { environment, CARD_DAILY_LIMITS } = require("../../config");
 const DBService = require("../services/DBService");
 
 module.exports = {
+  ListProducts: async (req, res) => {
+    try {
+      const data = await DBService.Product.Find({ status: "active" });
+      return res.json({
+        status: Status.SUCCESS,
+        message: "Products list.",
+        data,
+      });
+    } catch (e) {
+      ErrorManager.getError(res, "UNKNOWN_ERROR");
+      logger.error(e.message + "\n" + e.stack);
+      if (environment === "prod") throw e;
+    }
+  },
+
   BuyProduct: async (req, res) => {
     try {
       const { name, cardnumber, cvc, expiration, price } = req.body;

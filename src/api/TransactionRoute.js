@@ -6,6 +6,7 @@ const Middleware = require("../cors/Middleware");
 module.exports = () => {
   router.use(Middleware.UserAuth);
   router.post("/transfer/:id", TransactionController.TransferMoney);
+  router.get("/recent", TransactionController.GetRecent);
   router.get("/statement", TransactionController.GetStatement);
 
   return router;

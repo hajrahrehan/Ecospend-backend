@@ -50,6 +50,9 @@ app.use("/beneficiary/", BeneficiaryRoute);
 const TransactionRoute = require("../src/api/TransactionRoute")();
 app.use("/transaction/", TransactionRoute);
 
+const ChatRoute = require("../src/api/ChatRoute")();
+app.use("/chat/", ChatRoute);
+
 const TicketRoute = require("../src/api/TicketRoute")();
 app.use("/ticket/", TicketRoute);
 

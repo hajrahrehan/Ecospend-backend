@@ -39,7 +39,7 @@ module.exports = {
       }
 
       let receiver = null;
-      if (beneficiary.bank === "HelloBank") {
+      if (beneficiary.bank === "EcoSpend" || beneficiary.bank === "HelloBank") {
         receiver = await DBService.User.FindOne({
           account_no: beneficiary.account_no,
         });
@@ -74,6 +74,40 @@ module.exports = {
         status: Status.SUCCESS,
         message: "Amount transferred.",
         data: {},
+      });
+    } catch (e) {
+      ErrorManager.getError(res, "UNKNOWN_ERROR");
+      logger.error(e.message + "\n" + e.stack);
+      if (environment === "prod") throw e;
+    }
+  },
+
+  GetRecent: async (req, res) => {
+    try {
+      const list = await DBService.Transaction.List(
+        {
+          $or: [{ userId: req.user._id }, { account_no: req.user.account_no }],
+        },
+      );
+
+      const recent = list.slice(0, 10);
+      const data = recent.map((x) => {
+        const isDebit =
+          x?.userId && x?.userId.toString() === req.user._id.toString();
+        return {
+          tid: x._id,
+          time: x.time,
+          name: x.name,
+          credit: !isDebit ? x.amount : 0,
+          debit: isDebit ? x.amount : 0,
+          type: x.type,
+        };
+      });
+
+      return res.json({
+        status: Status.SUCCESS,
+        message: "Recent transactions.",
+        data,
       });
     } catch (e) {
       ErrorManager.getError(res, "UNKNOWN_ERROR");

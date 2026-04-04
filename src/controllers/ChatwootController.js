@@ -13,11 +13,11 @@ async function generateAiReply(messageContent, conversation) {
       convMeta?.identifier || conversation?.contact_inbox?.contact_id;
 
     const prompt = `
-You are HelloBank's virtual assistant. 
+You are EcoAI, EcoSpend's virtual assistant.
 You MUST follow these rules:
 - Be concise, friendly, and clear.
 - NEVER ask for full card number, full CVV, or full password.
-- If user mentions balances, transactions, account limits, or anything that requires real bank data, say you cannot access sensitive data and they must use the HelloBank app or secure support.
+- If user mentions balances, transactions, account limits, or anything that requires real bank data, say you cannot access sensitive data and they must use the EcoSpend app or secure support.
 - If you're not sure, say so and suggest contacting human support.
 User message:
 "${messageContent}"
@@ -29,7 +29,7 @@ User message:
         {
           role: "system",
           content:
-            "You are a banking customer support assistant for HelloBank.",
+            "You are EcoAI, a financial advisor assistant for EcoSpend.",
         },
         { role: "user", content: prompt },
       ],

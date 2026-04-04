@@ -17,5 +17,9 @@ module.exports = () => {
 
   router.post("/block-card", AdminController.BlockCard);
 
+  router.get("/products", AdminController.GetProducts);
+  router.post("/product", AdminController.AddProduct);
+  router.delete("/product/:id", AdminController.DeleteProduct);
+
   return router;
 };
