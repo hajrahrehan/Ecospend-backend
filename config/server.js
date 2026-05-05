@@ -1,3 +1,4 @@
+//Express setup, route registration and server start
 const express = require("express");
 const bodyParser = require("body-parser");
 var cors = require("cors");
@@ -37,9 +38,6 @@ app.use("/auth/", AuthRoute);
 
 const ProductRoute = require("../src/api/ProductRoute")();
 app.use("/product/", ProductRoute);
-
-const ChatwootRoute = require("../src/api/ChatwootRoute")();
-app.use("/chatwoot/", ChatwootRoute);
 
 const UserRoute = require("../src/api/UserRoute")();
 app.use("/user/", UserRoute);

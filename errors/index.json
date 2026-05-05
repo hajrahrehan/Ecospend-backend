@@ -71,7 +71,7 @@
   },
   "LIMITED_REACHED": {
     "status": "error",
-    "message": "Daily limit reached.",
+    "message": "{0}",
     "statusCode": 400
   },
   "TICKET_DOESNOT_EXISTS": {

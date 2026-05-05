@@ -9,16 +9,8 @@ module.exports = {
     let filter = a ? { ...a } : {};
 
     if (start) {
-      const startDate = new Date(start);
-      startDate.setHours(0, 0, 0);
-      const range = { $gte: startDate };
-
-      if (end) {
-        const endDate = new Date(end);
-        endDate.setHours(23, 59, 59);
-        range.$lte = endDate;
-      }
-
+      const range = { $gte: new Date(start) };
+      if (end) range.$lte = new Date(end);
       filter.time = range;
     }
 

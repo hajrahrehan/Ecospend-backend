@@ -1,3 +1,4 @@
+//This file uses Mongoose to connect to MongoDB
 const mongoose = require("mongoose");
 require("dotenv/config");
 const { DB } = require("../config");

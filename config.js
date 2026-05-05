@@ -7,14 +7,9 @@ module.exports = {
     database: process.env.DBURL || "",
   },
   CARD_DAILY_LIMITS: {
-    Silver: 50000,
-    Gold: 100000,
-    Platinum: 250000,
-  },
-  Chatwoot: {
-    baseUrl: process.env.CHATWOOT_BASE_URL,
-    accountId: process.env.CHATWOOT_ACCOUNT_ID,
-    botToken: process.env.CHATWOOT_BOT_TOKEN,
+    Silver: 500000,
+    Gold: 2000000,
+    Platinum: 10000000,
   },
   Groq: {
     apiKey: process.env.GROQ_API_KEY,

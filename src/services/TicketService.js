@@ -6,7 +6,7 @@ module.exports = {
   },
 
   Find: async (where) => {
-    return TicketModel.find(where);
+    return TicketModel.find(where).populate("userId", "fname lname email account_no");
   },
   FindOne: async (where) => {
     return TicketModel.findOne(where);

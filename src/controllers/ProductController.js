@@ -109,7 +109,14 @@ module.exports = {
       );
 
       if (totalSpentToday + amount > limit) {
-        return ErrorManager.getError(res, "LIMITED_REACHED");
+        const remaining = limit - totalSpentToday;
+        let msg;
+        if (totalSpentToday === 0) {
+          msg = `This purchase (Rs.${amount.toLocaleString()}) exceeds your ${card.type} card's daily limit of Rs.${limit.toLocaleString()}. Use a higher-tier card or buy a cheaper item.`;
+        } else {
+          msg = `Daily limit nearly reached. You have Rs.${remaining.toLocaleString()} remaining today on your ${card.type} card (limit: Rs.${limit.toLocaleString()}).`;
+        }
+        return ErrorManager.getError(res, "LIMITED_REACHED", msg);
       }
 
       await DBService.Transaction.Create({
